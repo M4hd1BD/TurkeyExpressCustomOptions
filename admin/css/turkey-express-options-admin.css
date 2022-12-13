@@ -9,3 +9,7 @@
 .turkeyExpressOptions th {
     width: 40%;
 }
+
+.turkeyExpressOptions input[type='submit'] {
+    width: 30%;
+}
