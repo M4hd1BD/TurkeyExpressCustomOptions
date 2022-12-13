@@ -52,8 +52,8 @@ class TurkeyExpressOptions_Admin {
 		$this->TurkeyExpressOptions = $TurkeyExpressOptions;
 		$this->version = $version;
 
-		add_action( 'admin_menu', array( $this, 'teo_add_plugin_page' ) );
-        add_action( 'admin_init', array( $this, 'teo_page_init' ) );
+		add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
+        add_action( 'admin_init', array( $this, 'page_init' ) );
 
 	}
 
