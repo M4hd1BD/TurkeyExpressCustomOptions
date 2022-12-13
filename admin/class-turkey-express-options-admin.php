@@ -110,10 +110,10 @@ class TurkeyExpressOptions_Admin {
     {
         // This page will be under "Settings"
         add_options_page(
-            'Settings Admin', 
-            'My Settings', 
+            'Turkey Express Options', 
+            'Turkey Express Options', 
             'manage_options', 
-            'my-setting-admin', 
+            'turkey-express-options', 
             array( $this, 'create_admin_page' )
         );
     }
@@ -124,15 +124,15 @@ class TurkeyExpressOptions_Admin {
     public function create_admin_page()
     {
         // Set class property
-        $this->options = get_option( 'my_option_name' );
+        $this->options = get_option( 'turkeyExpressOptions' );
         ?>
         <div class="wrap">
-            <h1>My Settings</h1>
+            <h1>Turkey Express Custom Options</h1>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
-                settings_fields( 'my_option_group' );
-                do_settings_sections( 'my-setting-admin' );
+                settings_fields( 'turkeyExpressOptionsGroup' );
+                do_settings_sections( 'turkeyExpressSettings' );
                 submit_button();
             ?>
             </form>
@@ -146,33 +146,33 @@ class TurkeyExpressOptions_Admin {
     public function page_init()
     {        
         register_setting(
-            'my_option_group', // Option group
-            'my_option_name', // Option name
+            'turkeyExpressOptionsGroup', // Option group
+            'turkeyExpressOptions', // Option name
             array( $this, 'sanitize' ) // Sanitize
         );
 
         add_settings_section(
-            'setting_section_id', // ID
-            'My Custom Settings', // Title
+            'turkeyExpressOptions', // ID
+            'Turkey Express Settings', // Title
             array( $this, 'print_section_info' ), // Callback
-            'my-setting-admin' // Page
+            'turkeyExpressSettings' // Page
         );  
 
         add_settings_field(
-            'id_number', // ID
-            'ID Number', // Title 
-            array( $this, 'id_number_callback' ), // Callback
-            'my-setting-admin', // Page
-            'setting_section_id' // Section           
+            'whatsAppToolTipText', // ID
+            'WhatsApp Floating Icon ToolTip Text', // Title 
+            array( $this, 'whatsAppToolTipText_callback' ), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
         );      
 
-        add_settings_field(
-            'title', 
-            'Title', 
-            array( $this, 'title_callback' ), 
-            'my-setting-admin', 
-            'setting_section_id'
-        );      
+        // add_settings_field(
+        //     'title', 
+        //     'Title', 
+        //     array( $this, 'title_callback' ), 
+        //     'turkeyExpressSettings', 
+        //     'turkeyExpressOptions'
+        // );
     }
 
     /**
@@ -183,11 +183,11 @@ class TurkeyExpressOptions_Admin {
     public function sanitize( $input )
     {
         $new_input = array();
-        if( isset( $input['id_number'] ) )
-            $new_input['id_number'] = absint( $input['id_number'] );
+        if( isset( $input['whatsAppToolTipText'] ) )
+            $new_input['whatsAppToolTipText'] = absint( $input['whatsAppToolTipText'] );
 
-        if( isset( $input['title'] ) )
-            $new_input['title'] = sanitize_text_field( $input['title'] );
+        // if( isset( $input['title'] ) )
+        //     $new_input['title'] = sanitize_text_field( $input['title'] );
 
         return $new_input;
     }
@@ -197,28 +197,28 @@ class TurkeyExpressOptions_Admin {
      */
     public function print_section_info()
     {
-        print 'Enter your settings below:';
+        print 'Customize the options below:';
     }
 
     /** 
      * Get the settings option array and print one of its values
      */
-    public function id_number_callback()
+    public function whatsAppToolTipText_callback()
     {
         printf(
-            '<input type="text" id="id_number" name="my_option_name[id_number]" value="%s" />',
-            isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
+            '<input type="text" id="whatsAppToolTipText" name="turkeyExpressOptions[whatsAppToolTipText]" value="%s" />',
+            isset( $this->options['whatsAppToolTipText'] ) ? esc_attr( $this->options['whatsAppToolTipText']) : ''
         );
     }
 
     /** 
      * Get the settings option array and print one of its values
      */
-    public function title_callback()
-    {
-        printf(
-            '<input type="text" id="title" name="my_option_name[title]" value="%s" />',
-            isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
-        );
-    }
+    // public function title_callback()
+    // {
+    //     printf(
+    //         '<input type="text" id="title" name="turkeyExpressOptions[title]" value="%s" />',
+    //         isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
+    //     );
+    // }
 }
