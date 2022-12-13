@@ -128,7 +128,7 @@ class TurkeyExpressOptions_Admin {
         ?>
         <div class="wrap">
             <h1>Turkey Express Custom Options</h1>
-            <form method="post" action="options.php">
+            <form method="post" action="options.php" class="turkeyExpressOptions">
             <?php
                 // This prints out all hidden setting fields
                 settings_fields( 'turkeyExpressOptionsGroup' );

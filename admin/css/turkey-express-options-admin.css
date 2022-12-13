@@ -2,3 +2,10 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+.turkeyExpressOptions input {
+    width: 100%;
+}
+.turkeyExpressOptions th {
+    width: 40%;
+}
