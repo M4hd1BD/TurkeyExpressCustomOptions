@@ -184,7 +184,7 @@ class TurkeyExpressOptions_Admin {
     {
         $new_input = array();
         if( isset( $input['whatsAppToolTipText'] ) )
-            $new_input['whatsAppToolTipText'] = absint( $input['whatsAppToolTipText'] );
+            $new_input['whatsAppToolTipText'] = sanitize_text_field( $input['whatsAppToolTipText'] );
 
         // if( isset( $input['title'] ) )
         //     $new_input['title'] = sanitize_text_field( $input['title'] );
