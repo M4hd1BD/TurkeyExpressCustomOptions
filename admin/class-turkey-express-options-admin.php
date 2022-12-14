@@ -263,7 +263,7 @@ class TurkeyExpressOptions_Admin
         );
     }
 
-    public function verifiedBGColor_callback()
+    public function inspectedBGColor_callback()
     {
         printf(
             '<input type="color" id="inspectedBGColor" name="turkeyExpressOptions[inspectedBGColor]" value="%s" />',
