@@ -174,6 +174,13 @@ class TurkeyExpressOptions_Admin
             'turkeyExpressSettings', // Page
             'turkeyExpressOptions' // Section           
         );
+        add_settings_field(
+            'verifiedBGColor', // ID
+            'Verified Badge Background Color', // Title 
+            array($this, 'verifiedBGColor_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
     }
 
     /**
@@ -188,6 +195,8 @@ class TurkeyExpressOptions_Admin
             $new_input['whatsAppToolTipText'] = sanitize_text_field($input['whatsAppToolTipText']);
         if (isset($input['verifiedText']))
             $new_input['verifiedText'] = sanitize_text_field($input['verifiedText']);
+        if (isset($input['verifiedBGColor']))
+            $new_input['verifiedBGColor'] = sanitize_text_field($input['verifiedBGColor']);
         
         return $new_input;
     }
@@ -216,6 +225,14 @@ class TurkeyExpressOptions_Admin
         printf(
             '<input type="text" id="verifiedText" name="turkeyExpressOptions[verifiedText]" value="%s" />',
             isset($this->options['verifiedText']) ? esc_attr($this->options['verifiedText']) : ''
+        );
+    }
+
+    public function verifiedBGColor_callback()
+    {
+        printf(
+            '<input type="color" id="verifiedBGColor" name="turkeyExpressOptions[verifiedBGColor]" value="%s" />',
+            isset($this->options['verifiedBGColor']) ? esc_attr($this->options['verifiedBGColor']) : ''
         );
     }
 }
