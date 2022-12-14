@@ -181,6 +181,21 @@ class TurkeyExpressOptions_Admin
             'turkeyExpressSettings', // Page
             'turkeyExpressOptions' // Section           
         );
+
+        add_settings_field(
+            'inspectedText', // ID
+            'Inspected Badge Text', // Title 
+            array($this, 'inspectedText_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
+        add_settings_field(
+            'inspectedBGColor', // ID
+            'Inspected Badge Background Color', // Title 
+            array($this, 'inspectedBGColor_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
     }
 
     /**
@@ -197,7 +212,11 @@ class TurkeyExpressOptions_Admin
             $new_input['verifiedText'] = sanitize_text_field($input['verifiedText']);
         if (isset($input['verifiedBGColor']))
             $new_input['verifiedBGColor'] = sanitize_text_field($input['verifiedBGColor']);
-        
+        if (isset($input['inspectedText']))
+            $new_input['inspectedText'] = sanitize_text_field($input['inspectedText']);
+        if (isset($input['inspectedBGColor']))
+            $new_input['inspectedBGColor'] = sanitize_text_field($input['inspectedBGColor']);
+
         return $new_input;
     }
 
@@ -233,6 +252,22 @@ class TurkeyExpressOptions_Admin
         printf(
             '<input type="color" id="verifiedBGColor" name="turkeyExpressOptions[verifiedBGColor]" value="%s" />',
             isset($this->options['verifiedBGColor']) ? esc_attr($this->options['verifiedBGColor']) : ''
+        );
+    }
+
+    public function inspectedText_callback()
+    {
+        printf(
+            '<input type="text" id="inspectedText" name="turkeyExpressOptions[inspectedText]" value="%s" />',
+            isset($this->options['inspectedText']) ? esc_attr($this->options['inspectedText']) : ''
+        );
+    }
+
+    public function verifiedBGColor_callback()
+    {
+        printf(
+            '<input type="color" id="inspectedBGColor" name="turkeyExpressOptions[inspectedBGColor]" value="%s" />',
+            isset($this->options['inspectedBGColor']) ? esc_attr($this->options['inspectedBGColor']) : ''
         );
     }
 }
