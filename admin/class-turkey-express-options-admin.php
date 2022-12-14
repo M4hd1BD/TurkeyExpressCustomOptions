@@ -166,6 +166,14 @@ class TurkeyExpressOptions_Admin
             'turkeyExpressSettings', // Page
             'turkeyExpressOptions' // Section           
         );
+
+        add_settings_field(
+            'verifiedText', // ID
+            'Verified Badge Text', // Title 
+            array($this, 'verifiedText_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
     }
 
     /**
@@ -178,7 +186,9 @@ class TurkeyExpressOptions_Admin
         $new_input = array();
         if (isset($input['whatsAppToolTipText']))
             $new_input['whatsAppToolTipText'] = sanitize_text_field($input['whatsAppToolTipText']);
-
+        if (isset($input['verifiedText']))
+            $new_input['verifiedText'] = sanitize_text_field($input['verifiedText']);
+        
         return $new_input;
     }
 
@@ -201,14 +211,11 @@ class TurkeyExpressOptions_Admin
         );
     }
 
-    /** 
-     * Get the settings option array and print one of its values
-     */
-    // public function title_callback()
-    // {
-    //     printf(
-    //         '<input type="text" id="title" name="turkeyExpressOptions[title]" value="%s" />',
-    //         isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
-    //     );
-    // }
+    public function verifiedText_callback()
+    {
+        printf(
+            '<input type="text" id="verifiedText" name="turkeyExpressOptions[verifiedText]" value="%s" />',
+            isset($this->options['verifiedText']) ? esc_attr($this->options['verifiedText']) : ''
+        );
+    }
 }
