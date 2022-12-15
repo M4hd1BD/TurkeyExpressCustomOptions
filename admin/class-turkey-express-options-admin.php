@@ -56,6 +56,8 @@ class TurkeyExpressOptions_Admin
 
         add_action('admin_menu', array($this, 'add_plugin_page'));
         add_action('admin_init', array($this, 'page_init'));
+        add_filter('atbdp_form_custom_widgets', array($this, 'turkeyExpressCustomAddListingFields'));
+        add_filter('atbdp_listing_type_settings_field_list', array($this, 'turkeyExpressCustomAllListingsFields'));
     }
 
     /**
@@ -166,36 +168,6 @@ class TurkeyExpressOptions_Admin
             'turkeyExpressSettings', // Page
             'turkeyExpressOptions' // Section           
         );
-
-        add_settings_field(
-            'verifiedText', // ID
-            'Verified Badge Text', // Title 
-            array($this, 'verifiedText_callback'), // Callback
-            'turkeyExpressSettings', // Page
-            'turkeyExpressOptions' // Section           
-        );
-        add_settings_field(
-            'verifiedBGColor', // ID
-            'Verified Badge Background Color', // Title 
-            array($this, 'verifiedBGColor_callback'), // Callback
-            'turkeyExpressSettings', // Page
-            'turkeyExpressOptions' // Section           
-        );
-
-        add_settings_field(
-            'inspectedText', // ID
-            'Inspected Badge Text', // Title 
-            array($this, 'inspectedText_callback'), // Callback
-            'turkeyExpressSettings', // Page
-            'turkeyExpressOptions' // Section           
-        );
-        add_settings_field(
-            'inspectedBGColor', // ID
-            'Inspected Badge Background Color', // Title 
-            array($this, 'inspectedBGColor_callback'), // Callback
-            'turkeyExpressSettings', // Page
-            'turkeyExpressOptions' // Section           
-        );
     }
 
     /**
@@ -208,15 +180,6 @@ class TurkeyExpressOptions_Admin
         $new_input = array();
         if (isset($input['whatsAppToolTipText']))
             $new_input['whatsAppToolTipText'] = sanitize_text_field($input['whatsAppToolTipText']);
-        if (isset($input['verifiedText']))
-            $new_input['verifiedText'] = sanitize_text_field($input['verifiedText']);
-        if (isset($input['verifiedBGColor']))
-            $new_input['verifiedBGColor'] = sanitize_text_field($input['verifiedBGColor']);
-        if (isset($input['inspectedText']))
-            $new_input['inspectedText'] = sanitize_text_field($input['inspectedText']);
-        if (isset($input['inspectedBGColor']))
-            $new_input['inspectedBGColor'] = sanitize_text_field($input['inspectedBGColor']);
-
         return $new_input;
     }
 
@@ -238,36 +201,131 @@ class TurkeyExpressOptions_Admin
             isset($this->options['whatsAppToolTipText']) ? esc_attr($this->options['whatsAppToolTipText']) : ''
         );
     }
-
-    public function verifiedText_callback()
+    public function turkeyExpressCustomAddListingFields($fields)
     {
-        printf(
-            '<input type="text" id="verifiedText" name="turkeyExpressOptions[verifiedText]" value="%s" />',
-            isset($this->options['verifiedText']) ? esc_attr($this->options['verifiedText']) : ''
+        $custom_field_meta_key_field = apply_filters('directorist_custom_field_meta_key_field_args', array(
+            'type'  => 'hidden',
+            'label' => esc_html__('Key', 'turkeyExpress'),
+            'value' => 'custom-radio',
+            'rules' => array(
+                'unique'   => true,
+                'required' => true,
+            ),
+        ));
+
+        $fields['turkey-express-badge'] = array(
+            'label' => 'TurkeyExpress: Badge',
+            'icon' => 'la la-id-badge',
+            'options' => [
+                'type' => [
+                    'type'  => 'hidden',
+                    'value' => 'radio',
+                ],
+                'label' => [
+                    'type'  => 'text',
+                    'label' => __('Badge Text', 'turkeyExpress'),
+                    'value' => 'Badge Text',
+                ],
+                'field_key' => array_merge($custom_field_meta_key_field, [
+                    'value' => 'turkey-express-badge',
+                ]),
+                'options' => [
+                    'type' => 'multi-fields',
+                    'label' => __('Options', 'turkeyExpress'),
+                    'add-new-button-label' => __('Add Option', 'turkeyExpress'),
+                    'options' => [
+                        'option_value' => [
+                            'type'  => 'text',
+                            'label' => __('Option Value', 'turkeyExpress'),
+                            'value' => '',
+                        ],
+                        'option_label' => [
+                            'type'  => 'text',
+                            'label' => __('Option Label', 'turkeyExpress'),
+                            'value' => '',
+                        ],
+                    ]
+                ],
+                'description' => [
+                    'type'  => 'color',
+                    'label' => __('Badge Background Color', 'turkeyExpress'),
+                    'value' => '#FFFFFF',
+                ],
+                'only_for_admin' => [
+                    'type'  => 'toggle',
+                    'label'  => __('Only For Admin Use', 'turkeyExpress'),
+                    'value' => true,
+                ],
+            ]
         );
+        return $fields;
     }
 
-    public function verifiedBGColor_callback()
+    public function turkeyExpressCustomAllListingsFields($fields)
     {
-        printf(
-            '<input type="color" id="verifiedBGColor" name="turkeyExpressOptions[verifiedBGColor]" value="%s" />',
-            isset($this->options['verifiedBGColor']) ? esc_attr($this->options['verifiedBGColor']) : ''
+        $turkey_express_badge = array(
+            'type'    => "list-item",
+            'label'   => __("Turkey Express: Badge", "turkeyExpress"),
+            'icon'    => 'uil uil-0-plus',
+            'hook'    => "turkey-express-badge",
+            'show_if' => array(
+                'where'      => "submission_form_fields.value.fields",
+                'conditions' => array(
+                    array('key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'),
+                ),
+            ),
         );
-    }
 
-    public function inspectedText_callback()
-    {
-        printf(
-            '<input type="text" id="inspectedText" name="turkeyExpressOptions[inspectedText]" value="%s" />',
-            isset($this->options['inspectedText']) ? esc_attr($this->options['inspectedText']) : ''
-        );
-    }
+        foreach ($fields as $key => $value) {
 
-    public function inspectedBGColor_callback()
-    {
-        printf(
-            '<input type="color" id="inspectedBGColor" name="turkeyExpressOptions[inspectedBGColor]" value="%s" />',
-            isset($this->options['inspectedBGColor']) ? esc_attr($this->options['inspectedBGColor']) : ''
-        );
+            if ('listings_card_grid_view' == $key) {
+
+                /* (With thumbnail) Registered widgets for Grid layout */
+
+                $custom_widgets = array(
+                    'turkey-express-badge' => $turkey_express_badge,
+                );
+
+                // Registers custom widgets.
+                foreach ($custom_widgets as $widget_key => $widget_value) {
+                    $fields[$key]['card_templates']['grid_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
+                }
+
+                // Inserted widgets in placeholder.
+
+                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
+                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge');
+
+                /* (Without thumbnail) Registered widgets for Grid layout */
+
+                $custom_widgets = array(
+                    'turkey-express-badge' => $turkey_express_badge,
+                );
+
+                // Registers custom widgets.
+                foreach ($custom_widgets as $widget_key => $widget_value) {
+                    $fields[$key]['card_templates']['grid_view_without_thumbnail']['widgets'][$widget_key] = $widget_value;
+                }
+            }
+
+            if ('listings_card_list_view' === $key) {
+
+                /* (With thumbnail) Registered widgets for List layout */
+
+                $custom_widgets = array(
+                    'turkey-express-badge' => $turkey_express_badge,
+                );
+                // Registers custom widgets.
+                foreach ($custom_widgets as $widget_key => $widget_value) {
+                    $fields[$key]['card_templates']['list_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
+                }
+
+                // Inserted widgets in placeholder.
+
+                array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
+            }
+        }
+
+        return $fields;
     }
 }
