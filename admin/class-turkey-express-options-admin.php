@@ -295,17 +295,6 @@ class TurkeyExpressOptions_Admin
 
                 array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
                 array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge');
-
-                /* (Without thumbnail) Registered widgets for Grid layout */
-
-                $custom_widgets = array(
-                    'turkey-express-badge' => $turkey_express_badge,
-                );
-
-                // Registers custom widgets.
-                foreach ($custom_widgets as $widget_key => $widget_value) {
-                    $fields[$key]['card_templates']['grid_view_without_thumbnail']['widgets'][$widget_key] = $widget_value;
-                }
             }
 
             if ('listings_card_list_view' === $key) {
@@ -322,6 +311,7 @@ class TurkeyExpressOptions_Admin
 
                 // Inserted widgets in placeholder.
 
+                array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
                 array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
             }
         }
