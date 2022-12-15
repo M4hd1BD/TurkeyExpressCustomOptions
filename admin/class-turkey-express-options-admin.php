@@ -265,57 +265,56 @@ class TurkeyExpressOptions_Admin
     {
         $turkey_express_badge = array(
             'type'    => "list-item",
-            'label'   => __("Turkey Express: Badge", "turkeyExpress"),
+            'label'   => __( "Turkey Express: Badge", "turkeyExpress" ),
             'icon'    => 'la la-id-badge',
             'hook'    => "turkey-express-badge",
             'show_if' => array(
                 'where'      => "submission_form_fields.value.fields",
                 'conditions' => array(
-                    array('key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'),
+                    array( 'key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge' ),
                 ),
             ),
         );
-
-        foreach ($fields as $key => $value) {
-
-            if ('listings_card_grid_view' == $key) {
-
+    
+        foreach ( $fields as $key => $value ) {
+    
+            if ( 'listings_card_grid_view' == $key ) {
+    
                 /* (With thumbnail) Registered widgets for Grid layout */
-
+    
                 $custom_widgets = array(
                     'turkey-express-badge' => $turkey_express_badge,
                 );
-
+    
                 // Registers custom widgets.
-                foreach ($custom_widgets as $widget_key => $widget_value) {
+                foreach ( $custom_widgets as $widget_key => $widget_value ) {
                     $fields[$key]['card_templates']['grid_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
                 }
-
+    
                 // Inserted widgets in placeholder.
-
-                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
-                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge');
+    
+                array_push( $fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge' );
+                array_push( $fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge' );
             }
-
-            if ('listings_card_list_view' === $key) {
-
+    
+            if ( 'listings_card_list_view' === $key ) {
+    
                 /* (With thumbnail) Registered widgets for List layout */
-
+    
                 $custom_widgets = array(
                     'turkey-express-badge' => $turkey_express_badge,
                 );
                 // Registers custom widgets.
-                foreach ($custom_widgets as $widget_key => $widget_value) {
+                foreach ( $custom_widgets as $widget_key => $widget_value ) {
                     $fields[$key]['card_templates']['list_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
                 }
-
+    
                 // Inserted widgets in placeholder.
-
-                array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
-                array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
+    
+                array_push( $fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge' );
             }
         }
-
+    
         return $fields;
     }
 }
