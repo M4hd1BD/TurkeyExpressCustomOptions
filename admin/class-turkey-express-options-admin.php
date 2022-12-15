@@ -266,7 +266,7 @@ class TurkeyExpressOptions_Admin
         $turkey_express_badge = array(
             'type'    => "list-item",
             'label'   => __("Turkey Express: Badge", "turkeyExpress"),
-            'icon'    => 'uil uil-0-plus',
+            'icon'    => 'la la-id-badge',
             'hook'    => "turkey-express-badge",
             'show_if' => array(
                 'where'      => "submission_form_fields.value.fields",
