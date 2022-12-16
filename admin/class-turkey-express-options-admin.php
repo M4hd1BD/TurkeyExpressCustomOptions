@@ -59,6 +59,7 @@ class TurkeyExpressOptions_Admin
         add_filter('atbdp_form_custom_widgets', array($this, 'turkeyExpressCustomAddListingFields'));
         add_filter('atbdp_listing_type_settings_field_list', array($this, 'turkeyExpressCustomAllListingsFields'));
         add_filter( 'directorist_search_form_widgets', array( $this, 'turkeyExpressCustomSearchFields' ) );
+        add_filter( 'directorist_listing_header_layout', array( $this, 'turkeyExpressSingleHeaderFields' ) );
     }
 
     /**
@@ -344,6 +345,20 @@ class TurkeyExpressOptions_Admin
 			$fields['available_widgets']['widgets'][$widget_key] = $widget_value;
 		}
 
+		return $fields;
+	}
+
+    public function turkeyExpressSingleHeaderFields( $fields ) {
+
+			$fields['widgets']['turkey-express-badge'] = array(
+				'type'  => "list-item",
+				'label' => esc_html__( "Badge", "onelisting" ),
+				'icon'  => 'uil uil-text-fields',
+			);
+
+			array_push( $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
+				'turkey-express-badge' );
+		
 		return $fields;
 	}
 }
