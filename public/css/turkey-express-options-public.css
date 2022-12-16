@@ -2,3 +2,13 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ .directorist-badge.directorist-info-item.turkey-express-badge-single {
+    padding: 0 0.5rem !important;
+    vertical-align: middle;
+    line-height: 2.2 !important;
+    text-align: center;
+}
+.directorist-badge.directorist-info-item.turkey-express-badge-single:first-child {
+    padding: 0 0.5rem !important;
+}

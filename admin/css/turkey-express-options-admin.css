@@ -13,3 +13,7 @@
 .turkeyExpressOptions input[type='submit'] {
     width: 30%;
 }
+
+.cptm-listing-card-preview-footer {
+    display: flex !important;
+}
