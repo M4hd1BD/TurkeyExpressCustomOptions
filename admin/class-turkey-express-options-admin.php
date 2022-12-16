@@ -350,14 +350,23 @@ class TurkeyExpressOptions_Admin
 
     public function turkeyExpressSingleHeaderFields( $fields ) {
 
-			$fields['widgets']['turkey-express-badge'] = array(
-				'type'  => "list-item",
-				'label' => esc_html__( "Badge", "onelisting" ),
-				'icon'  => 'uil uil-text-fields',
-			);
+			// $fields['widgets']['turkey-express-badge'] = array(
+			// 	'type'  => "list-item",
+			// 	'label' => esc_html__( "Badge", "onelisting" ),
+			// 	'icon'  => 'uil uil-text-fields',
+			// );
 
-			array_push( $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
-				'turkey-express-badge' );
+			// array_push( $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
+			// 	'turkey-express-badge' );
+
+            $turkey_express_badge = array(
+                'type'  => 'toggle',
+                'label' => esc_html__( 'Show Badge', 'ddoctors' ),
+                'value' => false,
+            );
+    
+            // Single Listing-> Header-> After Title Widgets
+            $fields['card-options']['content_settings']['listing_title']['options']['fields']['turkey-express-badge']		= $turkey_express_badge;
 		
 		return $fields;
 	}
