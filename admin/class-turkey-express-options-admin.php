@@ -321,18 +321,18 @@ class TurkeyExpressOptions_Admin
 
     public function turkeyExpressCustomSearchFields( $fields ) {
 		$turkey_express_badge = array(
-			'options' => array(
-				'label'       => array(
-					'type'  => 'text',
-					'label' => __( 'Label', 'directorist' ),
-					'value' => 'Tag',
-				),
-				'placeholder' => array(
-					'type'  => 'text',
-					'label' => __( 'Placeholder', 'directorist' ),
-					'value' => 'Number',
-				),
-			),
+			'options' => [
+                'label' => [
+                    'type'  => 'text',
+                    'label'  => __( 'Label', 'directorist' ),
+                    'value' => 'Tag',
+                ],
+                'required' => [
+                    'type'  => 'toggle',
+                    'label'  => __( 'Required', 'directorist' ),
+                    'value' => false,
+                ],
+            ]
 		);
 
 		$widget_names = array(
