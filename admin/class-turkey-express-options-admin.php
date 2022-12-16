@@ -351,9 +351,15 @@ class TurkeyExpressOptions_Admin
     public function turkeyExpressSingleHeaderFields( $fields ) {
 
 			$fields['widgets']['turkey-express-badge'] = array(
-				'type'  => "list-item",
-				'label' => esc_html__( "Badge", "onelisting" ),
-				'icon'  => 'uil uil-text-fields',
+				'type' => "list-item",
+                'label' => __( "Badge", "directorist" ),
+                'icon' => 'uil uil-text-fields',
+                'show_if' => [
+                    'where' => "submission_form_fields.value.fields",
+                    'conditions' => [
+                        ['key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'],
+                    ],
+                ],
 			);
 
 			array_push( $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
