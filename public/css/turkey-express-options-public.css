@@ -9,6 +9,6 @@
     line-height: 2.2 !important;
     text-align: center;
 }
-.directorist-badge.directorist-info-item.turkey-express-badge-single:first-child {
+.directorist-listing-single__info >.directorist-badge.directorist-info-item.turkey-express-badge-single:first-child {
     padding-left: 0.5rem !important;
 }
