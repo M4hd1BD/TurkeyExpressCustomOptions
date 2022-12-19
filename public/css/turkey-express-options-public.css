@@ -14,16 +14,16 @@
 }
 
 .badgeToolTipIcon:after {
-    background-color: white;
-    margin-left: 5px;
-    height: 14px;
-    width: 14px;
+    background-color: white !important;
+    margin-left: 5px !important;
+    height: 14px !important;
+    width: 14px !important;
 }
 .turkey-express-badge {
     display: flex;
     align-items: center;
 }
-.turkey-express-badge > span:last-child:after{
+.badgeToolTip:after{
     content:  "";
     font-size: 14px;
     position: absolute;
@@ -37,6 +37,6 @@
     background: attr(data-background);
 }
 
-.badgeToolTipIcon:hover + .turkey-express-badge > span:last-child:after {
+.badgeToolTipIcon:hover + .badgeToolTip:after {
     content: attr(data-tooltip);
 }
