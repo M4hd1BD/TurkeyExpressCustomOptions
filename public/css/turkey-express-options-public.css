@@ -3,13 +3,13 @@
  * included in this file.
  */
 
- .directorist-badge.directorist-info-item.turkey-express-badge-single > span{
+ .turkey-express-badge-single > span {
     padding: 0 0.5rem !important;
     vertical-align: middle;
     line-height: 2.2 !important;
     text-align: center;
 }
-.directorist-listing-single__info >.directorist-badge.directorist-info-item.turkey-express-badge-single > span:first-child {
+.turkey-express-badge-single > span:first-child {
     padding-left: 0.5rem !important;
 }
 
