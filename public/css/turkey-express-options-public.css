@@ -2,14 +2,17 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-
- .turkey-express-badge-single > span {
+.turkey-express-badge-single {
+    display: flex;
+    align-items: center;
+}
+ .directorist-listing-single__info > .turkey-express-badge-single > span {
     padding: 0 0.5rem !important;
     vertical-align: middle;
     line-height: 2.2 !important;
     text-align: center;
 }
-.turkey-express-badge-single > span:first-child {
+.directorist-listing-single__info > .turkey-express-badge-single > span:first-child {
     padding-left: 0.5rem !important;
 }
 
