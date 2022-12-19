@@ -231,6 +231,11 @@ class TurkeyExpressOptions_Admin
                 'field_key' => array_merge($custom_field_meta_key_field, [
                     'value' => 'turkey-express-badge',
                 ]),
+                'placeholder' => [
+                    'type'  => 'text',
+                    'label' => __( 'Badge Description', 'turkeyExpress' ),
+                    'value' => '',
+                ],
                 'options' => [
                     'type' => 'multi-fields',
                     'label' => __('Options', 'turkeyExpress'),
