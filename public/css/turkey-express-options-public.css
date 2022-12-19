@@ -60,10 +60,6 @@
     background: rgba(0, 0, 0, 0.8);
 }
 
-.badgeToolTip:hover:after {
-    visibility: visible;
-}
-
 .turkey-express-badge-single > .badgeToolTip:after {
     width: auto;
 }
