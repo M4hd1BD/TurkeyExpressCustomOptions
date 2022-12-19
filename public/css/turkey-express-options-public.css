@@ -15,20 +15,30 @@
 
 .badgeToolTipIcon:after {
     background-color: white !important;
-    margin-left: 5px !important;
-    height: 14px !important;
+    height: 22px !important;
     width: 14px !important;
 }
 .turkey-express-badge {
     display: flex;
     align-items: center;
 }
+.turkey-express-badge > span{
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.badgeToolTip {
+    height: 22px;
+    padding-right: 0.5rem;
+    border-top-right-radius: 0.3125rem;
+    border-bottom-right-radius: 0.3125rem;
+}
 .badgeToolTip:after{
     visibility: hidden;
     content:  attr(data-tooltip);
-    font-size: 14px;
+    font-size: 10px;
     position: absolute;
-    top: -5px;
+    top: 100%;
     padding: 5px;
     width: 100%;
     z-index: 99999999;
