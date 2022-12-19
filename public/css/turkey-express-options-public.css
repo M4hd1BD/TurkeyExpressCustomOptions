@@ -24,7 +24,7 @@
     align-items: center;
 }
 .badgeToolTip:after{
-    display: none;
+    visibility: hidden;
     content:  attr(data-tooltip);
     font-size: 14px;
     position: absolute;
@@ -39,5 +39,5 @@
 }
 
 .badgeToolTip:hover + .badgeToolTip:after {
-    display: block;
+    visibility: visible;
 }
