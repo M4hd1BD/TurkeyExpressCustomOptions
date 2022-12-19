@@ -24,7 +24,8 @@
     align-items: center;
 }
 .badgeToolTip:after{
-    content:  "";
+    display: none;
+    content:  attr(data-tooltip);
     font-size: 14px;
     position: absolute;
     top: -5px;
@@ -34,9 +35,9 @@
     color: White;
     font-weight: Bold;
     border-radius: 5px;
-    background: attr(data-background);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .badgeToolTip:hover + .badgeToolTip:after {
-    content: attr(data-tooltip);
+    display: block;
 }
