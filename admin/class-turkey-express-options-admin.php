@@ -236,6 +236,11 @@ class TurkeyExpressOptions_Admin
                     'label' => __( 'Badge Description', 'turkeyExpress' ),
                     'value' => '',
                 ],
+                'learn_more' => [
+                    'type'  => 'text',
+                    'label' => __( 'Details Link', 'turkeyExpress' ),
+                    'value' => '',
+                ],
                 'options' => [
                     'type' => 'multi-fields',
                     'label' => __('Options', 'turkeyExpress'),
