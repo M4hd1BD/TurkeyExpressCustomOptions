@@ -17,7 +17,10 @@
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
-.directorist-listing-single__info > .turkey-express-badge-single > span:first-child {
+.directorist-listing-single__info > .turkey-express-badge-single > .badgeToolTip {
+    padding-left: 0 !important;
+}
+.directorist-listing-single .directorist-listing-single__info .turkey-express-badge-single .directorist-info-item {
     padding-left: 0.5rem !important;
 }
 
