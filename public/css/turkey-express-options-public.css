@@ -38,6 +38,6 @@
     background: rgba(0, 0, 0, 0.8);
 }
 
-.badgeToolTip:hover + .badgeToolTip:after {
+.badgeToolTip:hover:after {
     visibility: visible;
 }
