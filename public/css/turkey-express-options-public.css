@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
 }
-.turkey-express-badge > span:first-child{
+.turkey-express-badge > .hasToolTip {
     margin-right: 0 !important;
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
