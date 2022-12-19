@@ -63,6 +63,6 @@
     visibility: visible;
 }
 
-.turkey-express-badge-single > .badgeToolTip::after {
+.turkey-express-badge-single > .badgeToolTip:after {
     width: auto;
 }
