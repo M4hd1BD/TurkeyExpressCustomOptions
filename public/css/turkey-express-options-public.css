@@ -12,6 +12,11 @@
     line-height: 2.2 !important;
     text-align: center;
 }
+.directorist-listing-single__info > .turkey-express-badge-single > .hasToolTip {
+    margin-right: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
 .directorist-listing-single__info > .turkey-express-badge-single > span:first-child {
     padding-left: 0.5rem !important;
 }
