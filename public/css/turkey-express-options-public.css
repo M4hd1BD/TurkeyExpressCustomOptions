@@ -37,6 +37,6 @@
     background: attr(data-background);
 }
 
-.badgeToolTipIcon:hover + .badgeToolTip:after {
+.badgeToolTip:hover + .badgeToolTip:after {
     content: attr(data-tooltip);
 }
