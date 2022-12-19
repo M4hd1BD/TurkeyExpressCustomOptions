@@ -5,6 +5,7 @@
 .turkey-express-badge-single {
     display: flex;
     align-items: center;
+    margin-right: 3px;
 }
  .directorist-listing-single__info > .turkey-express-badge-single > span {
     padding: 0 0.5rem !important;
