@@ -13,7 +13,7 @@
     line-height: 2.2 !important;
     text-align: center;
 }
-.directorist-listing-single__info > .turkey-express-badge-single > .badgeToolTip {
+.directorist-listing-single__info > .turkey-express-badge-single > .badgeToolTip > .badgeToolTipText {
     width: auto;
 }
 .directorist-listing-single__info > .turkey-express-badge-single > .hasToolTip {
