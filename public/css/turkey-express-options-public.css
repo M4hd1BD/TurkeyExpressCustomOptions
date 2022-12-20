@@ -55,6 +55,7 @@
     top: 100%;
     padding: 5px;
     width: 100%;
+    height: auto !important;
     z-index: 99999999;
     color: White;
     font-weight: Bold;
