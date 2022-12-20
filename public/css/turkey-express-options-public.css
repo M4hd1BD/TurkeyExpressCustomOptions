@@ -45,9 +45,10 @@
     border-top-right-radius: 0.3125rem;
     border-bottom-right-radius: 0.3125rem;
 }
-.badgeToolTip:after{
-    visibility: hidden;
-    content:  attr(data-tooltip);
+.badgeToolTipText.isHidden {
+    display: none;
+}
+.badgeToolTipText {
     font-size: 10px;
     position: absolute;
     top: 100%;
@@ -58,8 +59,4 @@
     font-weight: Bold;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.8);
-}
-
-.turkey-express-badge-single > .badgeToolTip:after {
-    width: auto;
 }
