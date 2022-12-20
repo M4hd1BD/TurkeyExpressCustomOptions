@@ -50,7 +50,7 @@
     display: none;
 }
 .badgeToolTipText {
-    font-size: 10px;
+    font-size: 8px;
     position: absolute;
     top: 100%;
     padding: 5px;
