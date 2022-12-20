@@ -63,3 +63,13 @@
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.8);
 }
+
+.directorist-listing-list .badgeToolTipText {
+    top: 100% !important;
+}
+
+@media screen and(max-width: 767px) {
+    .directorist-listing-list .badgeToolTipText {
+        left: 0 !important;
+    }
+}
