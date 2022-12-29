@@ -58,8 +58,8 @@ class TurkeyExpressOptions_Admin
         add_action('admin_init', array($this, 'page_init'));
         add_filter('atbdp_form_custom_widgets', array($this, 'turkeyExpressCustomAddListingFields'));
         add_filter('atbdp_listing_type_settings_field_list', array($this, 'turkeyExpressCustomAllListingsFields'));
-        add_filter( 'directorist_search_form_widgets', array( $this, 'turkeyExpressCustomSearchFields' ) );
-        add_filter( 'directorist_listing_header_layout', array( $this, 'turkeyExpressSingleHeaderFields' ) );
+        add_filter('directorist_search_form_widgets', array($this, 'turkeyExpressCustomSearchFields'));
+        add_filter('directorist_listing_header_layout', array($this, 'turkeyExpressSingleHeaderFields'));
     }
 
     /**
@@ -170,6 +170,14 @@ class TurkeyExpressOptions_Admin
             'turkeyExpressSettings', // Page
             'turkeyExpressOptions' // Section           
         );
+
+        add_settings_field(
+            'searchFormPopularCategories', // ID
+            'Search Form Popular Categories ID', // Title 
+            array($this, 'searchFormPopularCategories_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
     }
 
     /**
@@ -182,6 +190,9 @@ class TurkeyExpressOptions_Admin
         $new_input = array();
         if (isset($input['whatsAppToolTipText']))
             $new_input['whatsAppToolTipText'] = sanitize_text_field($input['whatsAppToolTipText']);
+        if (isset($input['searchFormPopularCategories']))
+            $new_input['searchFormPopularCategories'] = sanitize_text_field($input['searchFormPopularCategories']);
+
         return $new_input;
     }
 
@@ -201,6 +212,13 @@ class TurkeyExpressOptions_Admin
         printf(
             '<input type="text" id="whatsAppToolTipText" name="turkeyExpressOptions[whatsAppToolTipText]" value="%s" />',
             isset($this->options['whatsAppToolTipText']) ? esc_attr($this->options['whatsAppToolTipText']) : ''
+        );
+    }
+    public function searchFormPopularCategories_callback()
+    {
+        printf(
+            '<input type="text" id="searchFormPopularCategories" name="turkeyExpressOptions[searchFormPopularCategories]" value="%s" />',
+            isset($this->options['searchFormPopularCategories']) ? esc_attr($this->options['searchFormPopularCategories']) : ''
         );
     }
     public function turkeyExpressCustomAddListingFields($fields)
@@ -233,12 +251,12 @@ class TurkeyExpressOptions_Admin
                 ]),
                 'placeholder' => [
                     'type'  => 'text',
-                    'label' => __( 'Badge Description', 'turkeyExpress' ),
+                    'label' => __('Badge Description', 'turkeyExpress'),
                     'value' => '',
                 ],
                 'learn_more' => [
                     'type'  => 'text',
-                    'label' => __( 'Details Link', 'turkeyExpress' ),
+                    'label' => __('Details Link', 'turkeyExpress'),
                     'value' => '',
                 ],
                 'options' => [
@@ -277,104 +295,108 @@ class TurkeyExpressOptions_Admin
     {
         $turkey_express_badge = array(
             'type'    => "list-item",
-            'label'   => __( "Turkey Express: Badge", "turkeyExpress" ),
+            'label'   => __("Turkey Express: Badge", "turkeyExpress"),
             'icon'    => 'la la-id-badge',
             'hook'    => "turkey-express-badge",
             'show_if' => array(
                 'where'      => "submission_form_fields.value.fields",
                 'conditions' => array(
-                    array( 'key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge' ),
+                    array('key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'),
                 ),
             ),
         );
-    
-        foreach ( $fields as $key => $value ) {
-    
-            if ( 'listings_card_grid_view' == $key ) {
-    
+
+        foreach ($fields as $key => $value) {
+
+            if ('listings_card_grid_view' == $key) {
+
                 /* (With thumbnail) Registered widgets for Grid layout */
-    
+
                 $custom_widgets = array(
                     'turkey-express-badge' => $turkey_express_badge,
                 );
-    
+
                 // Registers custom widgets.
-                foreach ( $custom_widgets as $widget_key => $widget_value ) {
+                foreach ($custom_widgets as $widget_key => $widget_value) {
                     $fields[$key]['card_templates']['grid_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
                 }
-    
+
                 // Inserted widgets in placeholder.
-    
-                array_push( $fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge' );
-                array_push( $fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge' );
+
+                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
+                array_push($fields[$key]['card_templates']['grid_view_with_thumbnail']['layout']['thumbnail']['top_left']['acceptedWidgets'], 'turkey-express-badge');
             }
-    
-            if ( 'listings_card_list_view' === $key ) {
-    
+
+            if ('listings_card_list_view' === $key) {
+
                 /* (With thumbnail) Registered widgets for List layout */
-    
+
                 $custom_widgets = array(
                     'turkey-express-badge' => $turkey_express_badge,
                 );
                 // Registers custom widgets.
-                foreach ( $custom_widgets as $widget_key => $widget_value ) {
+                foreach ($custom_widgets as $widget_key => $widget_value) {
                     $fields[$key]['card_templates']['list_view_with_thumbnail']['widgets'][$widget_key] = $widget_value;
                 }
-    
+
                 // Inserted widgets in placeholder.
-    
-                array_push( $fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge' );
+
+                array_push($fields[$key]['card_templates']['list_view_with_thumbnail']['layout']['thumbnail']['top_right']['acceptedWidgets'], 'turkey-express-badge');
             }
         }
-    
+
         return $fields;
     }
 
-    public function turkeyExpressCustomSearchFields( $fields ) {
-		$turkey_express_badge = array(
-			'options' => [
+    public function turkeyExpressCustomSearchFields($fields)
+    {
+        $turkey_express_badge = array(
+            'options' => [
                 'label' => [
                     'type'  => 'text',
-                    'label'  => __( 'Label', 'directorist' ),
+                    'label'  => __('Label', 'directorist'),
                     'value' => 'Tag',
                 ],
                 'required' => [
                     'type'  => 'toggle',
-                    'label'  => __( 'Required', 'directorist' ),
+                    'label'  => __('Required', 'directorist'),
                     'value' => false,
                 ],
             ]
-		);
+        );
 
-		$widget_names = array(
-			'turkey-express-badge' => $turkey_express_badge
-		);
+        $widget_names = array(
+            'turkey-express-badge' => $turkey_express_badge
+        );
 
-		// Registers custom widgets.
-		foreach ( $widget_names as $widget_key => $widget_value ) {
-			$fields['available_widgets']['widgets'][$widget_key] = $widget_value;
-		}
+        // Registers custom widgets.
+        foreach ($widget_names as $widget_key => $widget_value) {
+            $fields['available_widgets']['widgets'][$widget_key] = $widget_value;
+        }
 
-		return $fields;
-	}
+        return $fields;
+    }
 
-    public function turkeyExpressSingleHeaderFields( $fields ) {
+    public function turkeyExpressSingleHeaderFields($fields)
+    {
 
-			$fields['widgets']['turkey-express-badge'] = array(
-				'type' => "list-item",
-                'label' => __( "Badge", "directorist" ),
-                'icon' => 'uil uil-text-fields',
-                'show_if' => [
-                    'where' => "submission_form_fields.value.fields",
-                    'conditions' => [
-                        ['key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'],
-                    ],
+        $fields['widgets']['turkey-express-badge'] = array(
+            'type' => "list-item",
+            'label' => __("Badge", "directorist"),
+            'icon' => 'uil uil-text-fields',
+            'show_if' => [
+                'where' => "submission_form_fields.value.fields",
+                'conditions' => [
+                    ['key' => '_any.widget_name', 'compare' => '=', 'value' => 'turkey-express-badge'],
                 ],
-			);
+            ],
+        );
 
-			array_push( $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
-				'turkey-express-badge' );
-		
-		return $fields;
-	}
+        array_push(
+            $fields['layout']['listings_header']['quick_info']['acceptedWidgets'],
+            'turkey-express-badge'
+        );
+
+        return $fields;
+    }
 }
