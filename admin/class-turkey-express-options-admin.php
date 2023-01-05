@@ -172,6 +172,14 @@ class TurkeyExpressOptions_Admin
         );
 
         add_settings_field(
+            'whatsAppToolTipMessage', // ID
+            'WhatsApp Floating Icon Message', // Title 
+            array($this, 'whatsAppToolTipMessage_callback'), // Callback
+            'turkeyExpressSettings', // Page
+            'turkeyExpressOptions' // Section           
+        );
+
+        add_settings_field(
             'searchFormPopularCategories', // ID
             'Search Form Popular Categories ID', // Title 
             array($this, 'searchFormPopularCategories_callback'), // Callback
@@ -190,6 +198,8 @@ class TurkeyExpressOptions_Admin
         $new_input = array();
         if (isset($input['whatsAppToolTipText']))
             $new_input['whatsAppToolTipText'] = sanitize_text_field($input['whatsAppToolTipText']);
+        if (isset($input['whatsAppToolTipMessage']))
+            $new_input['whatsAppToolTipMessage'] = sanitize_text_field($input['whatsAppToolTipMessage']);
         if (isset($input['searchFormPopularCategories']))
             $new_input['searchFormPopularCategories'] = sanitize_text_field($input['searchFormPopularCategories']);
 
@@ -212,6 +222,13 @@ class TurkeyExpressOptions_Admin
         printf(
             '<input type="text" id="whatsAppToolTipText" name="turkeyExpressOptions[whatsAppToolTipText]" value="%s" />',
             isset($this->options['whatsAppToolTipText']) ? esc_attr($this->options['whatsAppToolTipText']) : ''
+        );
+    }
+    public function whatsAppToolTipMessage_callback()
+    {
+        printf(
+            '<input type="text" id="whatsAppToolTipMessage" name="turkeyExpressOptions[whatsAppToolTipMessage]" value="%s" />',
+            isset($this->options['whatsAppToolTipMessage']) ? esc_attr($this->options['whatsAppToolTipMessage']) : ''
         );
     }
     public function searchFormPopularCategories_callback()
